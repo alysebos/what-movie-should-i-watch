@@ -2,12 +2,79 @@
 <html lang="en">
 <head>
 	<title>What Movie Should I Watch?</title>
+	<meta chars"et="utf-8">
+		<meta name="description" content="Recommendations for what movie you should watch based off of a movie you already like.">
 	<link rel="stylesheet" type="text/css" href="grid.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-	<script type="text/javascript src="script.js"></script>
+	<header role="banner">
+		<h1>What Movie Should I Watch?</h1>
+		<p>This small web application will give eight recommendations based on one of your favorite movies.</p>
+		<p>Just input a movie you like to start!</p>
+	</header>
+
+	<main role="main">
+
+		<section role="region" class="search-screen">
+			<form class="js-input-form input-form">
+				<div class="row">
+					<div class="col-12">
+						<label for="user-movie-title">Name one movie you like!</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-9">
+						<input name="user-movie-title" class="input-box js-input-box" id="user-movie-title" placeholder="A Goofy Movie" value="Jumanji" required>
+					</div>
+					<div class="col-3">
+						<button type="submit" class="submit-button">
+							<i class="fa fa-search"></i>Search
+						</button>
+					</div>
+				</div>
+			</form>
+		</section>
+
+		<section role="region" class="error-screen" hidden>
+			<div class="row">
+				<div class="col-12">
+					<h2>Oops! Something didn't work quite right!</h2>
+					<div class="js-err-message">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section role="region" class="results-screen" hidden>
+			<div class="row">
+				<div class="col-12">
+					<h2>Here are your results</h2>
+				</div>
+			</div>
+
+				<!-- REPEAT THE FOLLOWING DIV FOR EACH RESULT -->
+			<ul class="row js-movie-card-list">
+			</ul>
+
+			<div class="row">
+				<div class="col-12">
+					<button class="restart-button js-restart-button">
+						Try a different movie title...
+					</button>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<footer role="contentinfo">
+		<p>This web app was designed by <a href="#">Alyse Bos</a> using data from <a href="https://www.tastedive.com">TasteD!ve</a> and <a href="https://www.omdbapi.com">the Open Movie Database</a>.</p>
+	</footer>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type=""text/javascript" src="sampleData.js"></script>
+	<script type="text/javascript" src="script.js"></script>
 </body>
 </html>
