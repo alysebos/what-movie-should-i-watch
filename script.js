@@ -116,19 +116,21 @@ function displayDataFromTasteDive (data) {
 		// set up error screen stating no matches found
 		spellingErrorMessage(data.Similar.Info[0].Name);
 	} else {
+		// results screen header
+		$('.results-screen').find('h2').html(`If you like ${data.Similar.Info[0].Name}, then you might also like...`);
 		// Get this movie's data from TMDB
 		// First, set up the next movie we're checking in the queue, while removing it from the queue
 		let currentMovie = data.Similar.Results.shift();
 		// get basic data from TMDB (this api requires two calls to get the data I want, grrrr)
 		getDataFromTMDB(currentMovie.Name, function (movieInfo) {
 			// store the TMDB ID in a variable
-			let tmdbID = movieInfo.results[0].id;
+			const tmdbID = movieInfo.results[0].id;
 			// get the specific data I want from TMDB
 			getSpecificDataFromTMDB(tmdbID, function (specificInfo) {
 				// I only want to use the year from the date
-				let releaseYear = specificInfo.release_date.substring(0,4);
+				const releaseYear = specificInfo.release_date.substring(0,4);
 				// grab the star string using the vote average
-				let starString = renderStarString(specificInfo.vote_average);
+				const starString = renderStarString(specificInfo.vote_average);
 				// append data to the <li> - the youtube thumbnail should open in a lightbox
 				$('.js-movie-card-list').append(`
 					<li class="col-6 movie-card">
@@ -193,7 +195,6 @@ function watchErrorRestart () {
 }
 
 function loadPage () {
-	$('.js-input-box').focus();
 	watchSubmit();
 	watchRestart();
 	watchErrorRestart();

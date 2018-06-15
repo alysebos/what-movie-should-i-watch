@@ -14,6 +14,7 @@
  *   so 960 + 20 + 20 => 1000px
  *
  **/
+ 
 .row {
   max-width: 1000px;
   padding-left: 20px;

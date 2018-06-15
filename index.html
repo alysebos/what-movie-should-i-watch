@@ -18,7 +18,7 @@
 		<p>Just input a movie you like to start! I am working on this.</p>
 	</header>
 
-	<main role="main">
+	<main role="main" >
 
 		<section role="region" class="search-screen">
 			<form class="js-input-form input-form">
@@ -40,7 +40,7 @@
 			</form>
 		</section>
 
-		<section role="region" class="error-screen" hidden>
+		<section role="region" class="error-screen" aria-live="assertive" hidden>
 			<div class="row">
 				<div class="col-12">
 					<h2>Oops! Something didn't work quite right!</h2>
@@ -50,15 +50,15 @@
 			</div>
 		</section>
 
-		<section role="region" class="results-screen" hidden>
+		<section role="region" class="results-screen" aria-live="assertive" hidden>
 			<div class="row">
 				<div class="col-12">
-					<h2>Here are your results</h2>
+					<h2></h2>
 				</div>
 			</div>
 
-			<ul class="row js-movie-card-list">
-			</ul>
+			<ol class="row js-movie-card-list" role="list">
+			</ol>
 
 			<div class="row">
 				<div class="col-12">

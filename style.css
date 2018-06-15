@@ -6,12 +6,9 @@
 
 .movie-card {
 	padding: 20px;
+	list-style: none;
 }
 
 .movie-card img {
 	width: 100%;
-}
-
-iframe {
-	width: 90%;
 }
