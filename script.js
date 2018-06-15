@@ -72,6 +72,40 @@ function spellingErrorMessage (searchedString) {
 	$('.error-screen').prop('hidden', false);
 }
 
+//get the star string
+function renderStarString (movieRating) {
+	// whole stars should be the floor of the rating
+	let numOfWholeStars = Math.floor(movieRating);
+	// getting the remaining star value without rounding was being weird, so I rounded to nearest tenth
+	let remainingStarValue = Math.round(10 * (movieRating - numOfWholeStars))/10;
+	// initiate whether there is a fraction star
+	let fractionStar = false;
+	// set the values to determine whether there's a fraction star
+	if (remainingStarValue >= .3 && remainingStarValue <= .8) {
+		fractionStar = true;
+	// if the remaining star value is quite high, just bump it to next whole star, and remove fraction star if it's there
+	} else if (remainingStarValue > .8) {
+		numOfWholeStars++;
+		fractionStar = false;
+	}
+	// set the number of empty stars to 10 minus the whole stars
+	let numOfEmptyStars = 10 - numOfWholeStars;
+	if (fractionStar) {
+		// remove one empty star for the fraction star
+		numOfEmptyStars--;
+	}
+	// set up the whole star string
+	let starString = `<i class="fa fa-star"></i>`.repeat(numOfWholeStars);
+	if (fractionStar) {
+		// add the fraction star
+		starString += `<i class="fa fa-star-half-o"></i>`;
+	}
+	// add the empty stars
+	starString += `<i class="fa fa-star-o"></i>`.repeat(numOfEmptyStars);
+	//return the string
+	return starString;
+}
+
 // Displays the data from the API
 function displayDataFromTasteDive (data) {
 	// check if there is are no results
@@ -91,15 +125,19 @@ function displayDataFromTasteDive (data) {
 			let tmdbID = movieInfo.results[0].id;
 			// get the specific data I want from TMDB
 			getSpecificDataFromTMDB(tmdbID, function (specificInfo) {
-				// append data to the <li>
+				// I only want to use the year from the date
+				let releaseYear = specificInfo.release_date.substring(0,4);
+				// grab the star string using the vote average
+				let starString = renderStarString(specificInfo.vote_average);
+				// append data to the <li> - the youtube thumbnail should open in a lightbox
 				$('.js-movie-card-list').append(`
 					<li class="col-6 movie-card">
-						<img src="http://i3.ytimg.com/vi/${currentMovie.yID}/hqdefault.jpg" alt="Click this image to watch the ${currentMovie.Name} trailer">
+						<a href="http://www.youtube.com/embed/${currentMovie.yID}?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true" data-featherlight-iframe-style="display:block;border:none;height:85vh;width:85vw;"><img src="http://img.youtube.com/vi/${currentMovie.yID}/0.jpg" alt="Click this image to watch the ${currentMovie.Name} trailer in a light box" /></a>
 						<h3>${currentMovie.Name}</h3>
-						<p class="movie-year">${specificInfo.release_date}</p>
+						<p class="movie-year">Released in ${releaseYear}</p>
 						<p class="movie-plot">${specificInfo.overview}</p>
-						<p class="movie-rating">${specificInfo.vote_average}</p>
-						<p class="movie-link">${specificInfo.imdb_id}</p>
+						<p class="movie-rating">${starString}</p>
+						<p class="movie-link"><a href="https://www.imdb.com/title/${specificInfo.imdb_id}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
 					</li>
 				`);
 			});
