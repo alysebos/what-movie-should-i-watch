@@ -91,22 +91,26 @@ function displayDataFromTasteDive (data) {
 		spellingErrorMessage(data.Similar.Info[0].Name);
 	} else {
 		// set up the results variable and start the function to map through each item of the array I need within the API results
-		const results = data.Similar.Results.forEach(item => {
+		// const results = data.Similar.Results.forEach(item => {
 			// Get this movie's data from OMDB
-			getDataFromOMDB(item.Name, function (data) {
+			let currentMovie = data.Similar.Results.shift();
+			getDataFromOMDB(currentMovie.Name, function (movieInfo) {
 				//append all data into the <ul>
 				$('.js-movie-card-list').append(`
 					<li class="col-6 movie-card">
-						<embed src="https://www.youtube.com/embed/${item.yID}">
-						<h3>${item.Name}</h3>
-						<p class="movie-year">${data.Year}</p>
-						<p class="movie-plot">${data.Plot}</p>
-						<p class="movie-rating">${data.imdbRating}</p>
-						<p class="movie-link">${data.imdbID}</p>
+						<p>${currentMovie.yID}</p>
+						<h3>${currentMovie.Name}</h3>
+						<p class="movie-year">${movieInfo.Year}</p>
+						<p class="movie-plot">${movieInfo.Plot}</p>
+						<p class="movie-rating">${movieInfo.imdbRating}</p>
+						<p class="movie-link">${movieInfo.imdbID}</p>
 					</li>
 				`);
+				if (data.Similar.Results.length) {
+					displayDataFromTasteDive(data);
+				}
 			});
-		});
+		// });
 		// hide the search screen
 		$('.search-screen').prop('hidden', true);
 		// show the results screen
