@@ -94,7 +94,7 @@ function displayDataFromTasteDive (data) {
 				// append data to the <li>
 				$('.js-movie-card-list').append(`
 					<li class="col-6 movie-card">
-						<p>${currentMovie.yID}</p>
+						<img src="http://i3.ytimg.com/vi/${currentMovie.yID}/hqdefault.jpg" alt="Click this image to watch the ${currentMovie.Name} trailer">
 						<h3>${currentMovie.Name}</h3>
 						<p class="movie-year">${specificInfo.release_date}</p>
 						<p class="movie-plot">${specificInfo.overview}</p>

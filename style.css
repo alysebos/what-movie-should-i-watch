@@ -5,5 +5,9 @@
 }
 
 .movie-card {
-	height: 400px;
+	padding: 20px;
+}
+
+.movie-card img {
+	width: 100%;
 }
