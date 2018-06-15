@@ -134,7 +134,7 @@ function displayDataFromTasteDive (data) {
 				// append data to the <li> - the youtube thumbnail should open in a lightbox
 				$('.js-movie-card-list').append(`
 					<li class="col-6 movie-card">
-						<a href="http://www.youtube.com/embed/${currentMovie.yID}?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true" data-featherlight-iframe-style="display:block;border:none;height:85vh;width:85vw;"><img src="http://img.youtube.com/vi/${currentMovie.yID}/0.jpg" alt="Click this image to watch the ${currentMovie.Name} trailer in a light box" /></a>
+						<a href="https://www.youtube.com/embed/${currentMovie.yID}?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true" data-featherlight-iframe-style="display:block;border:none;height:85vh;width:85vw;"><img src="http://img.youtube.com/vi/${currentMovie.yID}/0.jpg" alt="Click this image to watch the ${currentMovie.Name} trailer in a light box" /></a>
 						<h3>${currentMovie.Name}</h3>
 						<p class="movie-year">Released in ${releaseYear}</p>
 						<p class="movie-plot">${specificInfo.overview}</p>
