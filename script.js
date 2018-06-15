@@ -1,5 +1,4 @@
-const tasteDiveURL = 'https://tastedive.com/api/similar';
-
+// function to pull data from TasteD!ve
 function getDataFromTasteDive (movieTitle, callback) {
 	// set up the query
 	const query = {
@@ -11,35 +10,34 @@ function getDataFromTasteDive (movieTitle, callback) {
 	}
 	// now actually pull the data from the query, and run the callback...
 	$.ajax({
-		url: tasteDiveURL,
+		url: 'https://tastedive.com/api/similar',
 		data: query,
 		dataType: 'jsonp',
 		success: callback,
 	});
 }
 
-/*
-// Delete this eventually -- uses dummy data so I'm not pulling my API constantly
-const tasteDiveData = tasteSample;
-
-// Delete this eventually -- loads the dummy data similarly to how the getJSON will work
-function getDataFromTasteDive (uselessArg, callback) {
-	callback(tasteDiveData);
-}
-*/
-
-// set up the OMDB URL
-const omdbURL = 'https://www.omdbapi.com';
-
-// get data from OMDB
-function getDataFromOMDB (movieTitle, callback) {
+// function to get data from TMDB
+function getDataFromTMDB (movieTitle, callback) {
 	const query = {
-		t: `${movieTitle}`,
-		type: 'movie',
-		apikey: '8d8c7d25',
+		query: `${movieTitle}`,
+		api_key: 'f502398e5f11045021445204a2e34722',
 	}
 	$.ajax({
-		url: omdbURL,
+		url: 'https://api.themoviedb.org/3/search/movie',
+		data: query,
+		dataType: 'jsonp',
+		success: callback,
+	});
+}
+
+// function get specific data from TMDB
+function getSpecificDataFromTMDB (movieID, callback) {
+	const query = {
+		api_key: 'f502398e5f11045021445204a2e34722',
+	}
+	$.ajax({
+		url: `https://api.themoviedb.org/3/movie/${movieID}`,
 		data: query,
 		dataType: 'jsonp',
 		success: callback,
@@ -74,14 +72,8 @@ function spellingErrorMessage (searchedString) {
 	$('.error-screen').prop('hidden', false);
 }
 
-// Display data from OMDB
-function displayDataFromOMDB (data){
-
-}
-
 // Displays the data from the API
 function displayDataFromTasteDive (data) {
-	console.log(data);
 	// check if there is are no results
 	if (data.error) {
 		// set up error screen
@@ -90,27 +82,34 @@ function displayDataFromTasteDive (data) {
 		// set up error screen stating no matches found
 		spellingErrorMessage(data.Similar.Info[0].Name);
 	} else {
-		// set up the results variable and start the function to map through each item of the array I need within the API results
-		// const results = data.Similar.Results.forEach(item => {
-			// Get this movie's data from OMDB
-			let currentMovie = data.Similar.Results.shift();
-			getDataFromOMDB(currentMovie.Name, function (movieInfo) {
-				//append all data into the <ul>
+		// Get this movie's data from TMDB
+		// First, set up the next movie we're checking in the queue, while removing it from the queue
+		let currentMovie = data.Similar.Results.shift();
+		// get basic data from TMDB (this api requires two calls to get the data I want, grrrr)
+		getDataFromTMDB(currentMovie.Name, function (movieInfo) {
+			// store the TMDB ID in a variable
+			let tmdbID = movieInfo.results[0].id;
+			// get the specific data I want from TMDB
+			getSpecificDataFromTMDB(tmdbID, function (specificInfo) {
+				// append data to the <li>
 				$('.js-movie-card-list').append(`
 					<li class="col-6 movie-card">
 						<p>${currentMovie.yID}</p>
 						<h3>${currentMovie.Name}</h3>
-						<p class="movie-year">${movieInfo.Year}</p>
-						<p class="movie-plot">${movieInfo.Plot}</p>
-						<p class="movie-rating">${movieInfo.imdbRating}</p>
-						<p class="movie-link">${movieInfo.imdbID}</p>
+						<p class="movie-year">${specificInfo.release_date}</p>
+						<p class="movie-plot">${specificInfo.overview}</p>
+						<p class="movie-rating">${specificInfo.vote_average}</p>
+						<p class="movie-link">${specificInfo.imdb_id}</p>
 					</li>
 				`);
-				if (data.Similar.Results.length) {
-					displayDataFromTasteDive(data);
-				}
 			});
-		// });
+			// Check if there is still something in the queue
+			if (data.Similar.Results.length) {
+				// go back and run it all over again if there is something in the queue
+				displayDataFromTasteDive(data);
+			}
+			// since the queue is empty, the function will end
+		});
 		// hide the search screen
 		$('.search-screen').prop('hidden', true);
 		// show the results screen
