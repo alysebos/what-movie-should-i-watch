@@ -58,7 +58,6 @@ function spellingErrorMessage (searchedString) {
 	$('.js-err-message').html(`
 		<p>I couldn't find any results matching ${searchedString}! Please go back and check your spelling or try again later.</p>
 	`);
-	$('.js-input-box').val(`${searchedString}`);
 	// show the error screen
 	$('.error-screen').prop('hidden', false);
 }
@@ -128,7 +127,6 @@ function displayDataFromTasteDive (data) {
 								<p class="movie-year">Here is a simplified version</p>
 								<p class="movie-plot">${currentMovie.wTeaser}</p>
 								<p class="movie-link"><a href="https://www.imdb.com/find?q=${currentMovie.Name}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
-								<p class="movie-link"><a href="${currentMovie.wUrl}" target="_blank">See more about ${currentMovie.Name} on Wikipedia</a></p>
 							</div>
 						</div>
 					</li>
@@ -159,7 +157,6 @@ function displayDataFromTasteDive (data) {
 									<p class="movie-plot">${specificInfo.overview}</p>
 									<p class="movie-rating">${starString}</p>
 									<p class="movie-link"><a href="https://www.imdb.com/title/${specificInfo.imdb_id}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
-									<p class="movie-link"><a href="${currentMovie.wUrl}" target="_blank">See more about ${currentMovie.Name} on Wikipedia</a></p>
 								</div>
 							</div>
 						</li>
@@ -190,7 +187,6 @@ function watchSubmit () {
 		event.preventDefault();
 		// get the information from the form and clear it
 		const searchedMovie = $(this).find('.js-input-box').val();
-		$(this).find('.js-input-box').val("");
 		getDataFromTasteDive (searchedMovie, displayDataFromTasteDive);
 	});
 }
@@ -199,6 +195,8 @@ function watchRestart () {
 	$('.js-restart-button').click(function (event) {
 		// prevent default behavior of restart button
 		event.preventDefault();
+		// reset the value in the search box
+		$('.js-input-box').val('');
 		// hide the results screen
 		$('.results-screen').prop('hidden', true);
 		// delete the results from the list
