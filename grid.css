@@ -33,7 +33,7 @@
   clear: both;
 }
 
-.col-1, .col-2, .col-3, .col-4, .col-6, .col-9, .col-12 {
+.col-1, .col-2, .col-3, .col-4, .col-6, .col-8, .col-9, .col-12 {
   float: left;
 
   /* Gutters:
@@ -47,14 +47,14 @@
 }
 
 /* Mobile defaults */
-.col-1, .col-2, .col-3, .col-4, .col-6, .col-9, .col-12 {
+.col-1, .col-2, .col-3, .col-4, .col-6, .col-8, .col-9, .col-12 {
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 
 /* Non-mobile, grid */
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 700px) {
   /* 3 columns, 3/12 in % */
 
   .col-1 {
@@ -62,7 +62,7 @@
   }
 
   .col-2 {
-    width: 16.6666666666666667%;
+    width: 16.666666666666666%;
   }
 
   .col-3 {
@@ -77,6 +77,10 @@
   /* 6 columns */
   .col-6 {
     width: 50%;
+  }
+
+  .col-8 {
+    width: 66.666666666666%;
   }
 
   .col-9 {

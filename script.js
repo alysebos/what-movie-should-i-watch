@@ -49,12 +49,7 @@ function apiErrorMessage (errReturned) {
 		<p>There was a problem loading data. The following error message was displayed:</p>
 		<p>${errReturned}</p>
 		<p>Please try again later, or if the problem persists just give up and watch the movie you just searched for. You like it any way!</p>
-		<button class="restart-button js-error-go-back-button">
-			Go back and try again
-		</button>
 	`);
-	// hide the search screen
-	$('.search-screen').prop('hidden', true);
 	// show the error screen
 	$('.error-screen').prop('hidden', false);
 }
@@ -62,12 +57,7 @@ function apiErrorMessage (errReturned) {
 function spellingErrorMessage (searchedString) {
 	$('.js-err-message').html(`
 		<p>I couldn't find any results matching ${searchedString}! Please go back and check your spelling or try again later.</p>
-		<button class="restart-button js-error-go-back-button">
-			Go back and try again
-		</button>
 	`);
-	// hide the search screen
-	$('.search-screen').prop('hidden', true);
 	// show the error screen
 	$('.error-screen').prop('hidden', false);
 }
@@ -123,35 +113,63 @@ function displayDataFromTasteDive (data) {
 		let currentMovie = data.Similar.Results.shift();
 		// get basic data from TMDB (this api requires two calls to get the data I want, grrrr)
 		getDataFromTMDB(currentMovie.Name, function (movieInfo) {
-			// store the TMDB ID in a variable
-			const tmdbID = movieInfo.results[0].id;
-			// get the specific data I want from TMDB
-			getSpecificDataFromTMDB(tmdbID, function (specificInfo) {
-				// I only want to use the year from the date
-				const releaseYear = specificInfo.release_date.substring(0,4);
-				// grab the star string using the vote average
-				const starString = renderStarString(specificInfo.vote_average);
-				// append data to the <li> - the youtube thumbnail should open in a lightbox
+			// if there is very lmited data in TMDB for the movie, make a simplified card
+			if (movieInfo.results.length == 0 || movieInfo.results[0].poster_path == null || movieInfo.results[0].backdrop_path == null || movieInfo.results[0].vote_count == 0) {
+				// create and store the simplified card in the array
 				$('.js-movie-card-list').append(`
-					<li class="col-6 movie-card">
-						<a href="https://www.youtube.com/embed/${currentMovie.yID}?rel=0&amp;autoplay=1" data-featherlight="iframe" data-featherlight-iframe-frameborder="0" data-featherlight-iframe-allow="autoplay; encrypted-media" data-featherlight-iframe-allowfullscreen="true" data-featherlight-iframe-style="display:block;border:none;height:85vh;width:85vw;"><img src="http://img.youtube.com/vi/${currentMovie.yID}/0.jpg" alt="Click this image to watch the ${currentMovie.Name} trailer in a light box" /></a>
-						<h3>${currentMovie.Name}</h3>
-						<p class="movie-year">Released in ${releaseYear}</p>
-						<p class="movie-plot">${specificInfo.overview}</p>
-						<p class="movie-rating">${starString}</p>
-						<p class="movie-link"><a href="https://www.imdb.com/title/${specificInfo.imdb_id}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
+					<li class="col-6 movie-card-list-item">
+						<div class="movie-card">
+							<div class="movie-card-info">
+								<h3>
+									${currentMovie.Name}
+								</h3>
+								<p class="movie-year">Detailed information on this movie was not available.</p>
+								<p class="movie-year">Here is a simplified version:</p>
+								<p class="movie-plot">${currentMovie.wTeaser}</p>
+								<p class="movie-link"><a href="https://www.imdb.com/find?q=${currentMovie.Name}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
+							</div>
+						</div>
 					</li>
 				`);
-			});
-			// Check if there is still something in the queue
-			if (data.Similar.Results.length) {
-				// go back and run it all over again if there is something in the queue
-				displayDataFromTasteDive(data);
+				// Check if there is still something in the queue
+				if (data.Similar.Results.length) {
+					// go back and run it all over again if there is something in the queue
+					displayDataFromTasteDive(data);
+				}
+			} else {
+			// store the TMDB ID in a variable
+				const tmdbID = movieInfo.results[0].id;
+				// get the specific data I want from TMDB
+				getSpecificDataFromTMDB(tmdbID, function (specificInfo) {
+					// I only want to use the year from the date
+					const releaseYear = specificInfo.release_date.substring(0,4);
+					// grab the star string using the vote average
+					const starString = renderStarString(specificInfo.vote_average);
+					// append data to the <li> - the youtube thumbnail should open in a lightbox
+					$('.js-movie-card-list').append(`
+						<li class="col-6 movie-card-list-item">
+							<div class="movie-card" style="background-image: url('https://image.tmdb.org/t/p/w1280${specificInfo.backdrop_path}');">
+								<div class="movie-card-info">
+									<h3><a href="#" data-featherlight="https://image.tmdb.org/t/p/w500${specificInfo.poster_path}">
+										${currentMovie.Name}
+									</a></h3>
+									<p class="movie-year">Released in ${releaseYear}</p>
+									<p class="movie-plot">${specificInfo.overview}</p>
+									<p class="movie-rating">${starString}</p>
+									<p class="movie-link"><a href="https://www.imdb.com/title/${specificInfo.imdb_id}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
+								</div>
+							</div>
+						</li>
+					`);
+				});
+				// Check if there is still something in the queue
+				if (data.Similar.Results.length) {
+					// go back and run it all over again if there is something in the queue
+					displayDataFromTasteDive(data);
+				}
 			}
-			// since the queue is empty, the function will end
 		});
-		// hide the search screen
-		$('.search-screen').prop('hidden', true);
+		// since the queue is empty, the function will end
 		// show the results screen
 		$('.results-screen').prop('hidden', false);
 	}
@@ -159,11 +177,16 @@ function displayDataFromTasteDive (data) {
 
 function watchSubmit () {
 	$('.js-input-form').submit(function (event) {
+		// hide the results screen
+		$('.results-screen').prop('hidden', true);
+		// hide the error screen
+		$('.error-screen').prop('hidden', true);
+		// delete the results from the list
+		$('.js-movie-card-list').html('');
 		// prevent the form from submitting
 		event.preventDefault();
 		// get the information from the form and clear it
 		const searchedMovie = $(this).find('.js-input-box').val();
-		$(this).find('.js-input-box').val("");
 		getDataFromTasteDive (searchedMovie, displayDataFromTasteDive);
 	});
 }
@@ -172,32 +195,18 @@ function watchRestart () {
 	$('.js-restart-button').click(function (event) {
 		// prevent default behavior of restart button
 		event.preventDefault();
+		// reset the value in the search box
+		$('.js-input-box').val('');
 		// hide the results screen
 		$('.results-screen').prop('hidden', true);
 		// delete the results from the list
 		$('.js-movie-card-list').html('');
-		// show the search screen
-		$('.search-screen').prop('hidden', false);
-	})
-}
-
-function watchErrorRestart () {
-	$('.js-err-message').on('click', '.js-error-go-back-button', function (event) {
-		// prevent default behavior
-		event.preventDefault();
-		// hide the error screen
-		$('.error-screen').prop('hidden', true);
-		// reset the error message
-		$('.js-err-message').html('');
-		// show the search screen
-		$('.search-screen').prop('hidden', false);
 	})
 }
 
 function loadPage () {
 	watchSubmit();
 	watchRestart();
-	watchErrorRestart();
 }
 
 $(loadPage);
