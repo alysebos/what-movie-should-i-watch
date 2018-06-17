@@ -124,6 +124,8 @@ function displayDataFromTasteDive (data) {
 								<h3>
 									${currentMovie.Name}
 								</h3>
+								<p class="movie-year">Detailed information on this movie was not available.</p>
+								<p class="movie-year">Here is a simplified version</p>
 								<p class="movie-plot">${currentMovie.wTeaser}</p>
 								<p class="movie-link"><a href="https://www.imdb.com/find?q=${currentMovie.Name}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
 								<p class="movie-link"><a href="${currentMovie.wUrl}" target="_blank">See more about ${currentMovie.Name} on Wikipedia</a></p>
