@@ -2,13 +2,197 @@
 	box-sizing: border-box;
 	padding: 0;
 	margin: 0;
+	font-family: 'Open Sans', sans-serif;
 }
 
-.movie-card {
-	padding: 20px;
+/* mobile and defaults */
+
+body {
+	font-size: 16px;
+	background-color: #DEE0E3;
+	padding-bottom: 25px;
+	color: #000;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+h1, h2, h3 {
+	font-family: 'Passion One', cursive;
+	font-weight: normal;
+	text-align: center;
+}
+
+h1 {
+	font-size: 250%;
+}
+
+h2 {
+	font-size: 200%;
+	color: #425D9B;
+}
+h3 {
+	font-size: 150%;
+}
+
+h1 a, h2 a, h3 a {
+	font-family: 'Passion One', cursive;
+}
+
+a, a:link, a:visited, a:active {
+	color: #425D9B;
+	text-decoration: none;
+	border: 0;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+header {
+	background-color: #425D9B;
+	color: #fff;
+	text-align: center;
+	padding: 5px;
+}
+
+label {
+	display: block;
+	text-align: center;
+	font-size: 110%;
+}
+
+.input-box, .submit-button {
+	width: 100%;
+	border: 0;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.input-box {
+	background-color: #fff;
+}
+
+.submit-button {
+	background-color: #B3BED7;
+}
+
+.restart-button {
+	display: block;
+	font-size: 125%;
+	border: 0;
+	padding: 15px;
+	border-radius: 5px;
+	color: #fff;
+	background-color: #425D9B;
+	margin: 0 auto;
+}
+
+
+main {
+	padding: 15px;
+}
+
+.movie-card-list-item {
 	list-style: none;
 }
 
-.movie-card img {
+.movie-card {
+	background-size: cover;
+	background-position: center;
+	background-color: #95BF42;
+	padding: 0;
+	height: 600px;
+	position: relative;
+	border: 5px solid #425D9B;
+	border-top-right-radius: 20px;
+	border-top-left-radius: 20px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.movie-card-info {
+	position: absolute;
+	bottom: 0;
 	width: 100%;
+	padding: 20px;
+	margin: 0;
+	background-color: rgba(255,255,255,0.85);
+	border: 0;
+	border-top: 10px solid #fff;
+	max-height: 570px;
+	overflow: auto;
+}
+
+.movie-card img {
+	float: left;
+}
+
+.movie-year, .movie-link {
+	font-size: 80%;
+	text-align: center;
+}
+
+.movie-plot {
+	margin: 20px 0;
+	line-height: 1.75em;
+}
+
+.movie-rating {
+	color: #E59517;
+	text-align: center;
+}
+
+footer {
+	font-size: 80%;
+	padding: 5px;
+	margin-top: 20px;
+	width: 100%;
+	background-color: #425D9B;
+	color: #fff;
+	text-align: center;
+	position: fixed;
+	bottom: 0;
+	border-top: 5px solid #fff;
+}
+
+footer a, footer a:link, footer a:visited, footer a:active {
+	color: #e3e6f0;
+	border: 0;
+}
+
+/* desktop */
+
+@media only screen and (min-width: 700px) {
+
+	body {
+		font-size: 14px;
+	}
+
+	header {
+		padding: 30px;
+	}
+
+	main {
+		padding: 45px;
+	}
+
+	footer {
+		font-size: 90%;
+	}
+
+	.movie-rating {
+		font-size: 150%;
+	}
+
+	label {
+		font-size: 125%;
+	}
+
+	.input-box, .submit-button {
+		padding: 15px;
+		font-size: 125%;
+	}
+
 }

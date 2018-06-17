@@ -5,6 +5,7 @@
 	<meta chars"et="utf-8">
 	<meta name="description" content="Recommendations for what movie you should watch based off of a movie you already like.">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Passion+One" rel="stylesheet">
 	<link href="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="grid.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,17 +15,17 @@
 
 	<header role="banner">
 		<h1>What Movie Should I Watch?</h1>
-		<p>This small web application will give eight recommendations based on one of your favorite movies.</p>
-		<p>Just input a movie you like to start! I am working on this.</p>
-	</header>
-
-	<main role="main" >
+		<div class="row">
+			<div class="col-12">
+				<p>This small web application will recommend eight movies to watch based on a movie you already like. You can explore these movies, or look for another movie if you're not interested in any of the results.</p>
+			</div>
+		</div>
 
 		<section role="region" class="search-screen">
 			<form class="js-input-form input-form">
-				<div class="row">
+				<div class="row-no-bottom-margin">
 					<div class="col-12">
-						<label for="user-movie-title">Name one movie you like!</label>
+						<label for="user-movie-title">Name one movie you like!</label> 
 					</div>
 				</div>
 				<div class="row">
@@ -33,12 +34,15 @@
 					</div>
 					<div class="col-3">
 						<button type="submit" class="submit-button">
-							<i class="fa fa-search"></i>Search
+							<i class="fa fa-search"></i> Search
 						</button>
 					</div>
 				</div>
 			</form>
 		</section>
+	</header>
+
+	<main role="main">
 
 		<section role="region" class="error-screen" aria-live="assertive" hidden>
 			<div class="row">
