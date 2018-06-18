@@ -99,6 +99,42 @@ function renderStarString (movieRating) {
 	return starString;
 }
 
+function renderSimplifiedResult (currentMovie)  {
+	$('.js-movie-card-list').append(`
+		<li class="movie-card-list-item masonry-item">
+			<div class="movie-card">
+				<div class="movie-card-info">
+					<h3>
+						${currentMovie.Name}
+					</h3>
+					<p class="movie-year">Detailed information on this movie was not available.</p>
+					<p class="movie-year">Here is a simplified version:</p>
+					<p class="movie-plot">${currentMovie.wTeaser}</p>
+					<p class="movie-link"><a href="https://www.imdb.com/find?q=${currentMovie.Name}" target="_blank">Search for ${currentMovie.Name} on IMDB</a></p>
+				</div>
+			</div>
+		</li>
+	`);
+}
+
+function renderDetailedResult (currentMovie, starString, specificInfo, releaseYear) {
+	$('.js-movie-card-list').append(`
+		<li class="movie-card-list-item masonry-item">
+			<div class="movie-card" style="background-image: url('https://image.tmdb.org/t/p/w1280${specificInfo.backdrop_path}');">
+				<div class="movie-card-info">
+					<h3><a href="#" data-featherlight="https://image.tmdb.org/t/p/w500${specificInfo.poster_path}">
+						${currentMovie.Name}
+					</a></h3>
+					<p class="movie-year">Released in ${releaseYear}</p>
+					<p class="movie-plot">${specificInfo.overview}</p>
+					<p class="movie-rating">${starString}</p>
+					<p class="movie-link"><a href="https://www.imdb.com/title/${specificInfo.imdb_id}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
+				</div>
+			</div>
+		</li>
+	`);
+}
+
 // Displays the data from the API
 function displayDataFromTasteDive (data) {
 	// check if there is are no results
@@ -119,21 +155,7 @@ function displayDataFromTasteDive (data) {
 			// if there is very lmited data in TMDB for the movie, make a simplified card
 			if (movieInfo.results.length == 0 || movieInfo.results[0].poster_path == null || movieInfo.results[0].backdrop_path == null || movieInfo.results[0].vote_count == 0) {
 				// create and store the simplified card in the array
-				$('.js-movie-card-list').append(`
-					<li class="movie-card-list-item masonry-item">
-						<div class="movie-card">
-							<div class="movie-card-info">
-								<h3>
-									${currentMovie.Name}
-								</h3>
-								<p class="movie-year">Detailed information on this movie was not available.</p>
-								<p class="movie-year">Here is a simplified version:</p>
-								<p class="movie-plot">${currentMovie.wTeaser}</p>
-								<p class="movie-link"><a href="https://www.imdb.com/find?q=${currentMovie.Name}" target="_blank">Search for ${currentMovie.Name} on IMDB</a></p>
-							</div>
-						</div>
-					</li>
-				`);
+				renderSimplifiedResult(currentMovie);
 				// Check if there is still something in the queue
 				if (data.Similar.Results.length) {
 					// go back and run it all over again if there is something in the queue
@@ -149,21 +171,7 @@ function displayDataFromTasteDive (data) {
 					// grab the star string using the vote average
 					const starString = renderStarString(specificInfo.vote_average);
 					// append data to the <li> - the youtube thumbnail should open in a lightbox
-					$('.js-movie-card-list').append(`
-						<li class="movie-card-list-item masonry-item">
-							<div class="movie-card" style="background-image: url('https://image.tmdb.org/t/p/w1280${specificInfo.backdrop_path}');">
-								<div class="movie-card-info">
-									<h3><a href="#" data-featherlight="https://image.tmdb.org/t/p/w500${specificInfo.poster_path}">
-										${currentMovie.Name}
-									</a></h3>
-									<p class="movie-year">Released in ${releaseYear}</p>
-									<p class="movie-plot">${specificInfo.overview}</p>
-									<p class="movie-rating">${starString}</p>
-									<p class="movie-link"><a href="https://www.imdb.com/title/${specificInfo.imdb_id}" target="_blank">See more about ${currentMovie.Name} on IMDB</a></p>
-								</div>
-							</div>
-						</li>
-					`);
+					renderDetailedResult(currentMovie, starString, specificInfo, releaseYear);
 				});
 				// Check if there is still something in the queue
 				if (data.Similar.Results.length) {
