@@ -54,7 +54,7 @@
 
 
 /* Non-mobile, grid */
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 750px) {
   /* 3 columns, 3/12 in % */
 
   .col-1 {

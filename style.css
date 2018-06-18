@@ -57,10 +57,6 @@ header {
 	padding: 5px;
 }
 
-header p {
-	font-size: 80%;
-}
-
 label {
 	display: block;
 	text-align: center;
@@ -163,7 +159,7 @@ footer a, footer a:link, footer a:visited, footer a:active {
 
 /* desktop */
 
-@media only screen and (min-width: 700px) {
+@media only screen and (min-width: 750px) {
 
 	body {
 		font-size: 14px;
