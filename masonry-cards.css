@@ -24,3 +24,13 @@
 	}
 
 }
+
+/* large desktop version */
+@media only screen and (min-width: 1000px) {
+
+	.masonry {
+		column-count: 3;
+		-webkit-column-count: 3;
+	}
+
+}
