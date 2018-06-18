@@ -7,71 +7,47 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Passion+One" rel="stylesheet">
 	<link href="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-	<link rel="stylesheet" type="text/css" href="grid.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="masonry-cards.css">
 </head>
 <body>
 
 	<header role="banner">
-		<h1>What Movie Should I Watch?</h1>
-		<div class="row">
-			<div class="col-12">
-				<p>This small web application will recommend eight movies to watch based on a movie you already like.</p>
-				<p>You can explore these movies, or look for another movie if you're not interested in any of the results.</p>
-			</div>
-		</div>
+		<div class="header-container">
+			<h1>What Movie Should I Watch?</h1>
+			<p>This small web application will recommend eight movies to watch based on a movie you already like.</p>
+			<p>You can explore these movies, or look for another movie if you're not interested in any of the results.</p>
 
-		<section role="region" class="search-screen">
-			<form class="js-input-form input-form">
-				<div class="row-no-bottom-margin">
-					<div class="col-12">
-						<label for="user-movie-title">Enter the title of a movie you like!</label> 
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-9">
-						<input name="user-movie-title" class="input-box js-input-box" id="user-movie-title" placeholder="A Goofy Movie" required>
-					</div>
-					<div class="col-3">
-						<button type="submit" class="submit-button">
-							<i class="fa fa-search"></i> Search
-						</button>
-					</div>
-				</div>
-			</form>
-		</section>
+			<section role="region" class="search-screen">
+				<form class="js-input-form input-form">
+					<label for="user-movie-title">Enter the title of a movie you like!</label> 
+					<input name="user-movie-title" class="input-box js-input-box" id="user-movie-title" placeholder="A Goofy Movie" required>
+					<button type="submit" class="submit-button">
+						<i class="fa fa-search"></i> Search
+					</button>
+				</form>
+			</section>
+		</div>
 	</header>
 
 	<main role="main">
 
 		<section role="region" class="error-screen" aria-live="assertive" hidden>
-			<div class="row">
-				<div class="col-12">
-					<h2>Oops! Something didn't work quite right!</h2>
-					<div class="js-err-message">
-					</div>
-				</div>
+			<h2>Oops! Something didn't work quite right!</h2>
+			<div class="js-err-message">
 			</div>
 		</section>
 
 		<section role="region" class="results-screen" aria-live="assertive" hidden>
-			<div class="row">
-				<div class="col-12">
-					<h2></h2>
-				</div>
-			</div>
+			<h2></h2>
 
-			<ol class="row js-movie-card-list" role="list">
+			<ol class="masonry js-movie-card-list" role="list">
 			</ol>
 
-			<div class="row">
-				<div class="col-12">
-					<button class="restart-button js-restart-button">
-						Try a different movie title...
-					</button>
-				</div>
-			</div>
+			<button class="restart-button js-restart-button">
+				Try a different movie title...
+			</button>
 		</section>
 
 	</main>

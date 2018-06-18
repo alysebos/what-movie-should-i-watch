@@ -22,6 +22,7 @@ h1, h2, h3 {
 	font-family: 'Passion One', cursive;
 	font-weight: normal;
 	text-align: center;
+	margin-bottom: 0.75em;
 }
 
 h1 {
@@ -34,6 +35,7 @@ h2 {
 }
 h3 {
 	font-size: 150%;
+	margin-bottom: 0.25em;
 }
 
 h1 a, h2 a, h3 a {
@@ -61,22 +63,32 @@ header {
 	padding: 5px;
 }
 
+.header-container {
+	max-width: 960px;
+	margin: auto;
+}
+
 label {
 	display: block;
 	text-align: center;
 	font-size: 110%;
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
 .input-box, .submit-button {
-	width: 100%;
 	border: 0;
 	border-radius: 5px;
 	padding: 0 25px;
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 20px;
 }
 
 .input-box {
 	background-color: #fff;
 	height: 61px;
+	width: 90%;
 }
 
 .submit-button {
@@ -85,6 +97,7 @@ label {
 	box-shadow: 0 6px #3F7244;
 	transition: all 0.1s;
 	-webkit-transition: all 0.1s;
+	width: 90%;
 }
 
 .submit-button:active {
@@ -105,6 +118,9 @@ label {
 
 main {
 	padding: 15px;
+	max-width: 960px;
+	margin: auto;
+	text-align: center;
 }
 
 .movie-card-list-item {
@@ -198,6 +214,7 @@ footer a, footer a:link, footer a:visited, footer a:active {
 		font-size: 90%;
 	}
 
+/*
 	.movie-card {
 		height: 600px;
 	}
@@ -209,6 +226,7 @@ footer a, footer a:link, footer a:visited, footer a:active {
 		bottom: 0;
 		margin-top: 20px;
 	}
+*/
 
 	.movie-rating {
 		font-size: 150%;
@@ -221,6 +239,15 @@ footer a, footer a:link, footer a:visited, footer a:active {
 	.input-box, .submit-button {
 		padding: 15px;
 		font-size: 125%;
+	}
+
+	.input-box {
+		width: 70%;
+		margin-right: 20px;
+	}
+
+	.submit-button {
+		width: 20%;
 	}
 
 }

@@ -120,7 +120,7 @@ function displayDataFromTasteDive (data) {
 			if (movieInfo.results.length == 0 || movieInfo.results[0].poster_path == null || movieInfo.results[0].backdrop_path == null || movieInfo.results[0].vote_count == 0) {
 				// create and store the simplified card in the array
 				$('.js-movie-card-list').append(`
-					<li class="col-6 movie-card-list-item">
+					<li class="movie-card-list-item masonry-item">
 						<div class="movie-card">
 							<div class="movie-card-info">
 								<h3>
@@ -150,7 +150,7 @@ function displayDataFromTasteDive (data) {
 					const starString = renderStarString(specificInfo.vote_average);
 					// append data to the <li> - the youtube thumbnail should open in a lightbox
 					$('.js-movie-card-list').append(`
-						<li class="col-6 movie-card-list-item">
+						<li class="movie-card-list-item masonry-item">
 							<div class="movie-card" style="background-image: url('https://image.tmdb.org/t/p/w1280${specificInfo.backdrop_path}');">
 								<div class="movie-card-info">
 									<h3><a href="#" data-featherlight="https://image.tmdb.org/t/p/w500${specificInfo.poster_path}">
