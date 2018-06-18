@@ -40,6 +40,10 @@ h1 a, h2 a, h3 a {
 	font-family: 'Passion One', cursive;
 }
 
+p {
+	margin: .5em 0;
+}
+
 a, a:link, a:visited, a:active {
 	color: #303963;
 	text-decoration: none;
@@ -66,16 +70,26 @@ label {
 .input-box, .submit-button {
 	width: 100%;
 	border: 0;
-	padding: 10px;
 	border-radius: 5px;
+	padding: 0 25px;
 }
 
 .input-box {
 	background-color: #fff;
+	height: 61px;
 }
 
 .submit-button {
+	height: 55px;
 	background-color: #5BA362;
+	box-shadow: 0 6px #3F7244;
+	transition: all 0.1s;
+	-webkit-transition: all 0.1s;
+}
+
+.submit-button:active {
+	box-shadow: none;
+	transform: translateY(6px);
 }
 
 .restart-button {
@@ -108,6 +122,13 @@ main {
 	border-top-left-radius: 20px;
 	border-bottom-right-radius: 0;
 	border-bottom-left-radius: 0;
+	transition: all 0.75s ease-in;
+	-webkit-transition: all 0.75s ease-in;
+}
+
+.movie-card:hover {
+	box-shadow: 0 0 25px 0 #000;
+	border: 5px solid #5BA362;
 }
 
 .movie-card-info {
@@ -150,7 +171,7 @@ footer {
 	position: fixed;
 	bottom: 0;
 	border-top: 5px solid #fff;
-}
+} 
 
 footer a, footer a:link, footer a:visited, footer a:active {
 	color: #e3e6f0;
@@ -183,10 +204,10 @@ footer a, footer a:link, footer a:visited, footer a:active {
 
 	.movie-card-info {
 		max-height: 300px;
-	overflow: auto;
-	position: absolute;
-	bottom: 0;
-	margin-top: 20px;
+		overflow: auto;
+		position: absolute;
+		bottom: 0;
+		margin-top: 20px;
 	}
 
 	.movie-rating {

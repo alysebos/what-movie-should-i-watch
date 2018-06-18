@@ -14,6 +14,7 @@ function getDataFromTasteDive (movieTitle, callback) {
 		data: query,
 		dataType: 'jsonp',
 		success: callback,
+		error: apiErrorMessage,
 	});
 }
 
@@ -28,6 +29,7 @@ function getDataFromTMDB (movieTitle, callback) {
 		data: query,
 		dataType: 'jsonp',
 		success: callback,
+		error: apiErrorMessage,
 	});
 }
 
@@ -41,14 +43,15 @@ function getSpecificDataFromTMDB (movieID, callback) {
 		data: query,
 		dataType: 'jsonp',
 		success: callback,
+		error: apiErrorMessage,
 	});
 }
 
 function apiErrorMessage (errReturned) {
 	$('.js-err-message').html(`
-		<p>There was a problem loading data. The following error message was displayed:</p>
-		<p>${errReturned}</p>
-		<p>Please try again later, or if the problem persists just give up and watch the movie you just searched for. You like it any way!</p>
+		<p>There was a problem loading data from the database.</p>
+		<p>Please try again later.</p>
+		<p>If the problem persists, just give up and watch the movie you just searched for. You like it any way!</p>
 	`);
 	// show the error screen
 	$('.error-screen').prop('hidden', false);
@@ -56,7 +59,7 @@ function apiErrorMessage (errReturned) {
 
 function spellingErrorMessage (searchedString) {
 	$('.js-err-message').html(`
-		<p>I couldn't find any results matching ${searchedString}! Please go back and check your spelling or try again later.</p>
+		<p>I couldn't find any results matching "<i>${searchedString}</i>"! Please go back and check your spelling or try again later.</p>
 	`);
 	// show the error screen
 	$('.error-screen').prop('hidden', false);
