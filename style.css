@@ -9,7 +9,7 @@
 
 body {
 	font-size: 16px;
-	background-color: #DEE0E3;
+	background-color: #eee;
 	padding-bottom: 25px;
 	color: #000;
 }
@@ -30,7 +30,7 @@ h1 {
 
 h2 {
 	font-size: 200%;
-	color: #425D9B;
+	color: #303963;
 }
 h3 {
 	font-size: 150%;
@@ -41,7 +41,7 @@ h1 a, h2 a, h3 a {
 }
 
 a, a:link, a:visited, a:active {
-	color: #425D9B;
+	color: #303963;
 	text-decoration: none;
 	border: 0;
 }
@@ -51,7 +51,7 @@ a:hover {
 }
 
 header {
-	background-color: #425D9B;
+	background-color: #303963;
 	color: #fff;
 	text-align: center;
 	padding: 5px;
@@ -79,7 +79,7 @@ label {
 }
 
 .submit-button {
-	background-color: #B3BED7;
+	background-color: #5BA362;
 }
 
 .restart-button {
@@ -89,10 +89,9 @@ label {
 	padding: 15px;
 	border-radius: 5px;
 	color: #fff;
-	background-color: #425D9B;
+	background-color: #303963;
 	margin: 0 auto;
 }
-
 
 main {
 	padding: 15px;
@@ -105,10 +104,10 @@ main {
 .movie-card {
 	background-size: cover;
 	background-position: center;
-	background-color: #95BF42;
+	background-color: #5BA362;
 	padding: 0;
 	position: relative;
-	border: 5px solid #425D9B;
+	border: 5px solid #fff;
 	border-top-right-radius: 20px;
 	border-top-left-radius: 20px;
 	border-bottom-right-radius: 0;
@@ -121,7 +120,7 @@ main {
 	margin: 0;
 	background-color: rgba(255,255,255,0.85);
 	border: 0;
-	border-top: 10px solid #fff;
+	border-top: 5px solid #fff;
 	margin-top: 200px;
 }
 
@@ -149,7 +148,7 @@ footer {
 	padding: 5px;
 	margin-top: 20px;
 	width: 100%;
-	background-color: #425D9B;
+	background-color: #303963;
 	color: #fff;
 	text-align: center;
 	position: fixed;
@@ -187,7 +186,7 @@ footer a, footer a:link, footer a:visited, footer a:active {
 	}
 
 	.movie-card-info {
-		max-height: 570px;
+		max-height: 300px;
 	overflow: auto;
 	position: absolute;
 	bottom: 0;
