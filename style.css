@@ -57,6 +57,10 @@ header {
 	padding: 5px;
 }
 
+header p {
+	font-size: 80%;
+}
+
 label {
 	display: block;
 	text-align: center;
@@ -103,7 +107,6 @@ main {
 	background-position: center;
 	background-color: #95BF42;
 	padding: 0;
-	height: 600px;
 	position: relative;
 	border: 5px solid #425D9B;
 	border-top-right-radius: 20px;
@@ -113,16 +116,13 @@ main {
 }
 
 .movie-card-info {
-	position: absolute;
-	bottom: 0;
 	width: 100%;
 	padding: 20px;
 	margin: 0;
 	background-color: rgba(255,255,255,0.85);
 	border: 0;
 	border-top: 10px solid #fff;
-	max-height: 570px;
-	overflow: auto;
+	margin-top: 200px;
 }
 
 .movie-card img {
@@ -180,6 +180,18 @@ footer a, footer a:link, footer a:visited, footer a:active {
 
 	footer {
 		font-size: 90%;
+	}
+
+	.movie-card {
+		height: 600px;
+	}
+
+	.movie-card-info {
+		max-height: 570px;
+	overflow: auto;
+	position: absolute;
+	bottom: 0;
+	margin-top: 20px;
 	}
 
 	.movie-rating {
