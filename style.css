@@ -254,7 +254,7 @@ footer a, footer a:link, footer a:visited, footer a:active {
 }
 
 /* large desktop version */
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1300px) {
 
 	.header-container, main {
 		max-width: 1400px;
