@@ -1,3 +1,4 @@
+// listen for the search submit
 function watchSubmit () {
 	$('.js-input-form').submit(function (event) {
 		// hide the results screen
@@ -14,6 +15,7 @@ function watchSubmit () {
 	});
 }
 
+// listen for the restart button
 function watchRestart () {
 	$('.js-restart-button').click(function (event) {
 		// prevent default behavior of restart button
