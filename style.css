@@ -215,20 +215,6 @@ footer a, footer a:link, footer a:visited, footer a:active {
 		font-size: 90%;
 	}
 
-/*
-	.movie-card {
-		height: 600px;
-	}
-
-	.movie-card-info {
-		max-height: 300px;
-		overflow: auto;
-		position: absolute;
-		bottom: 0;
-		margin-top: 20px;
-	}
-*/
-
 	.movie-rating {
 		font-size: 150%;
 	}
