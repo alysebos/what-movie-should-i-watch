@@ -1,3 +1,4 @@
+// render the API error message
 function apiErrorMessage (errReturned) {
 	// set up the error message
 	$('.js-err-message').html(`
@@ -9,6 +10,7 @@ function apiErrorMessage (errReturned) {
 	$('.error-screen').prop('hidden', false);
 }
 
+// render the spelling / no-results error message
 function spellingErrorMessage (searchedString) {
 	// set up the error message
 	$('.js-err-message').html(`
@@ -18,6 +20,7 @@ function spellingErrorMessage (searchedString) {
 	$('.error-screen').prop('hidden', false);
 }
 
+// render the simplified movie card
 function renderSimplifiedResult (currentMovie)  {
 	// This will show if there was no data about the movie in the TMDB API
 	$('.js-movie-card-list').append(`
@@ -37,6 +40,7 @@ function renderSimplifiedResult (currentMovie)  {
 	`);
 }
 
+// render the detailed movie card
 function renderDetailedResult (currentMovie, starString, specificInfo, releaseYear) {
 	// If the TMDB API provided detailed information, this will show
 	$('.js-movie-card-list').append(`
