@@ -1,5 +1,5 @@
 // render the API error message
-function apiErrorMessage (errReturned) {
+function apiErrorMessage () {
 	// set up the error message
 	$('.js-err-message').html(`
 		<p>There was a problem loading data from the database.</p>
@@ -64,7 +64,7 @@ function renderDetailedResult (currentMovie, starString, specificInfo, releaseYe
 function renderStarString (movieRating) {
 	// set whole stars to the Math.floor of the rating
 	let numOfWholeStars = Math.floor(movieRating);
-	// get the remaining star value. without rounding was being weird, so I rounded to nearest tenth
+	// get the remaining star value. without rounding, it was being weird, so I rounded to nearest tenth
 	let remainingStarValue = Math.round(10 * (movieRating - numOfWholeStars))/10;
 	// initiate whether there is a fraction star
 	let fractionStar = false;

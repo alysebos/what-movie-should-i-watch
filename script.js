@@ -3,7 +3,7 @@ function displayDataFromTasteDive (data) {
 	// check if there is are no results
 	if (data.error) {
 		// set up error screen
-		apiErrorMessage(data.error);
+		apiErrorMessage();
 	} else if (data.Similar.Results.length == 0) {
 		// set up error screen stating no matches found
 		spellingErrorMessage(data.Similar.Info[0].Name);
@@ -43,12 +43,13 @@ function displayDataFromTasteDive (data) {
 				}
 			}
 		});
-		// since the queue is empty, the function will end
+		// Once the script gets to this point, the array of results should be empty, all shifted off. the queue is empty, the function will end
 		// show the results screen
 		$('.results-screen').prop('hidden', false);
 	}
 }
 
+// Start up the event listeners
 function loadPage () {
 	watchSubmit();
 	watchRestart();
