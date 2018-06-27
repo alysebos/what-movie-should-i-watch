@@ -33,7 +33,7 @@ function displayDataFromTasteDive (data) {
 					const releaseYear = specificInfo.release_date.substring(0,4);
 					// grab the star string using the vote average
 					const starString = renderStarString(specificInfo.vote_average);
-					// append data to the <li> - the youtube thumbnail should open in a lightbox
+					// append data to the <li>
 					renderDetailedResult(currentMovie, starString, specificInfo, releaseYear);
 				});
 				// Check if there is still something in the queue
